@@ -2,4 +2,9 @@ import elevator
 import json
 
 
-print(json.dumps(elevator.ElevatorSystem(3, list(range(0, 81, 10))), cls=elevator.JSONEncoder))
+es = elevator.ElevatorSystem(3, list(range(0, 81, 10)))
+
+while True:
+    print(json.dumps(es, cls=elevator.JSONEncoder))
+    es.set_elevator_state(0, elevator.ElevatorState.UP)
+    es.step()
