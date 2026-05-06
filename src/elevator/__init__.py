@@ -8,7 +8,7 @@ class ElevatorSystem:
         self.pressed_floor_buttons = [False] * len(self.floors)
         self.elevators = [Elevator(self) for _ in range(0, elevators)]
 
-    def set_floor_button(self, floor, state):
+    def press_floor_button(self, floor, state):
         self.pressed_floor_buttons[floor] = state
 
     def press_elevator_button(self, elevator, floor, state):
@@ -72,3 +72,31 @@ class JSONEncoder(json.JSONEncoder):
             case ElevatorState:
                 return str(o)
         return super().default(o)
+
+
+def _bool_from_str(s: str) -> bool:
+    s = s.lower()
+    if s == "true":
+        return True
+    if s == "false":
+        return False
+    assert False, f"unknown boolean {s} should be true or false"
+
+class ElevatorStringController:
+    def command(self, *cmd):
+        match cmd:
+            case ["init", elevators, floors]:
+                self.elevator_system = ElevatorSystem(int(elevators), list(range(0, int(floors)*10, 10)))
+            case ["press_floor_button", floor, state]:
+                self.elevator_system.press_floor_button(int(floor), _bool_from_str(state))
+            case ["press_elevator_button", elevator, floor, state]:
+                self.elevator_system.press_elevator_button(int(elevator), int(floor), _bool_from_str(state))
+                return
+            case ["set_elevator_state", elevator, state]:
+                self.elevator_system.set_elevator_state(int(elevator), ElevatorState[state])
+            case ["step"]:
+                self.elevator_system.step()
+            case ["get_state_json"]:
+                return json.dumps(self.elevator_system, cls=JSONEncoder)
+            case _:
+                assert False, f"unknown cmd {cmd}"

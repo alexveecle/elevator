@@ -2,9 +2,11 @@ import elevator
 import json
 
 
-es = elevator.ElevatorSystem(3, list(range(0, 81, 10)))
+es = elevator.ElevatorStringController()
+
+es.command("init", "3", "8")
+es.command("set_elevator_state", "0", "UP")
 
 while True:
-    print(json.dumps(es, cls=elevator.JSONEncoder))
-    es.set_elevator_state(0, elevator.ElevatorState.UP)
-    es.step()
+    print(es.command("get_state_json"))
+    es.command("step")
