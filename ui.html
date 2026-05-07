@@ -1,18 +1,15 @@
+<!DOCTYPE html>
 <html>
   <body>
-    <script>
-      ws = new WebSocket("ws://127.0.0.1:8765/");
-      ws.addEventListener("open", () => {
-          console.log("connected");
-          setInterval(() => {
-              ws.send("get_state_json");
-          }, 100);
-      });
-      ws.addEventListener("message", (e) => {
-          data = JSON.parse(e.data);
-          document.getElementById("state").value = JSON.stringify(data);
-      });
-    </script>
+    <script src="ui.js"></script>
     <textarea id="state" disabled></textarea>
+    <elevator-system id="elevator-system">
+    </elevator-system>
+    <template id="floor-button">
+      <floor-button>
+        <button>floor</button>
+      </floor-button>
+    </template>
+    <label>Initialized <input type="checkbox" id="initialized" autocomplete="off"></label>
   </body>
 </html>
