@@ -5,6 +5,8 @@
     <elevator-system id="elevator-system">
       <h1>Floor buttons</h1>
       <floor-buttons></floor-buttons>
+      <h1>Elevators</h1>
+      <elevators></elevators>
       <h1>Debugging</h1>
       <label>Initialized <input type="checkbox" id="initialized" autocomplete="off"></label>
       <textarea id="state" disabled rows="80" cols="80"></textarea>
@@ -13,6 +15,14 @@
       <floor-button>
         <button>floor</button>
       </floor-button>
+    </template>
+    <template id="elevator">
+      <elevator>
+        <h2>Elevator</h2>
+        <label>Position <input type="text" disabled class="position"></label>
+        <label>State <select><option>UP</option><option>DOWN</option><option>OPEN</option><option>CLOSED</option></select></label>
+        <label>Pressed floor buttons<pressed-floor-buttons></pressed-floor-buttons></label>
+      </elevator>
     </template>
   </body>
 </html>

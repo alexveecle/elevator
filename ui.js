@@ -11,6 +11,11 @@ ws.addEventListener("message", (e) => {
     if(!document.getElementById("initialized").checked) {
         initialState(data);
     }
+    for(i=0; i<data.elevators.length; i++) {
+        elevatorData = data.elevators[i];
+        elevator = document.querySelector("#elevator-"+i);
+        elevator.querySelector(".position").value = elevatorData.position;
+    }
 });
 
 function initialState(data) {
@@ -22,6 +27,12 @@ function initialState(data) {
             ws.send("press_floor_button " + floor + " true");
         });
         document.querySelector("floor-buttons").append(floor_button);
+    }
+    for(i=0; i<data.elevators.length; i++) {
+        elevator = document.importNode(document.getElementById("elevator").content, true);
+        elevator.querySelector("h2").textContent += i;
+        elevator.querySelector("elevator").id = "elevator-" + i;
+        document.querySelector("elevators").append(elevator);
     }
     document.getElementById("initialized").checked = true;
     console.log("Initialized");
