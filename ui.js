@@ -33,6 +33,16 @@ function initialState(data) {
         elevator = document.importNode(document.getElementById("elevator").content, true);
         elevator.querySelector("h2").textContent += i;
         elevator.querySelector("elevator").id = "elevator-" + i;
+        for(j=0; j<data.pressed_floor_buttons.length; j++) {
+            floor_button = document.importNode(document.getElementById("floor-button").content, true);
+            floor_button.querySelector("button").textContent = j;
+            floor_button.querySelector("button").addEventListener("click", (e) => {
+                floor = e.target.textContent;
+                elevator = e.target.parentElement.parentElement.parentElement.id.match(/elevator-(.*)/)[1];
+                ws.send("press_elevator_button " + elevator + " " + floor + " true");
+            });
+            elevator.querySelector("floor-buttons").append(floor_button);
+        }
         document.querySelector("elevators").append(elevator);
     }
     document.getElementById("initialized").checked = true;
