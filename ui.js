@@ -15,6 +15,7 @@ ws.addEventListener("message", (e) => {
         elevatorData = data.elevators[i];
         elevator = document.querySelector("#elevator-"+i);
         elevator.querySelector(".position").value = elevatorData.position;
+        elevator.querySelector("select").selectedIndex = ["UP", "DOWN", "OPEN", "CLOSED"].findIndex((e) => e == elevatorData.state);
     }
 });
 
