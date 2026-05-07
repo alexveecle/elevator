@@ -11,7 +11,8 @@ async def echo(websocket):
     async for message in websocket:
         message = message.split()
         response = elevator.command(*message)
-        await websocket.send(str(response))
+        if response:
+            await websocket.send(str(response))
 
 
 async def async_main():
