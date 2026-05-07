@@ -70,7 +70,7 @@ class JSONEncoder(json.JSONEncoder):
                     "pressed_floor_buttons": pressed_floor_buttons,
                 }
             case ElevatorState:
-                return str(o)
+                return o.name
         return super().default(o)
 
 
