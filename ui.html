@@ -10,8 +10,9 @@
       });
       ws.addEventListener("message", (e) => {
           data = JSON.parse(e.data);
-          console.log(data);
+          document.getElementById("state").value = JSON.stringify(data);
       });
     </script>
+    <textarea id="state" disabled></textarea>
   </body>
 </html>
