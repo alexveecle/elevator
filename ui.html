@@ -2,14 +2,17 @@
 <html>
   <body>
     <script src="ui.js"></script>
-    <textarea id="state" disabled></textarea>
     <elevator-system id="elevator-system">
+      <h1>Floor buttons</h1>
+      <floor-buttons></floor-buttons>
+      <h1>Debugging</h1>
+      <label>Initialized <input type="checkbox" id="initialized" autocomplete="off"></label>
+      <textarea id="state" disabled rows="80" cols="80"></textarea>
     </elevator-system>
     <template id="floor-button">
       <floor-button>
         <button>floor</button>
       </floor-button>
     </template>
-    <label>Initialized <input type="checkbox" id="initialized" autocomplete="off"></label>
   </body>
 </html>

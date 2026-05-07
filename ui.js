@@ -21,7 +21,7 @@ function initialState(data) {
             floor = e.target.textContent;
             ws.send("press_floor_button " + floor + " true");
         });
-        document.getElementById("elevator-system").append(floor_button);
+        document.querySelector("floor-buttons").append(floor_button);
     }
     document.getElementById("initialized").checked = true;
     console.log("Initialized");
